@@ -3,14 +3,15 @@ const app = express();
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import cors from "cors";
+import "dotenv/config";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBf5MhooXsBvsDEP1fv4Y3XXmRo8JdOw-k",
+  apiKey: process.env.API_KEY,
   authDomain: "my-pet-info-dbc57.firebaseapp.com",
   projectId: "my-pet-info-dbc57",
   storageBucket: "my-pet-info-dbc57.appspot.com",
   messagingSenderId: "1064228661366",
-  appId: "1:1064228661366:web:6a06dfb149873da0aa1757",
+  appId: process.env.APP_ID,
 };
 
 let firebaseApp;
@@ -31,7 +32,7 @@ app.get("/dog-breeds", (req, res) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         breeds.push(doc.data());
       });
       res.send(breeds);
@@ -49,7 +50,7 @@ app.get("/dog-breeds/:id", (req, res) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
+        // console.log(doc.data());
         breedData = doc.data();
       });
       res.send(breedData);
